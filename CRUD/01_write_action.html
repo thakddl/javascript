@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script>
+  // n_title=잔소리&n_writer=꽉수밍&n_skills=java&n_skills=js&n_content=답변은+짱
+  // var v_queryString = location.href.split("?")[1];
+  // var v_params = v_queryString.split("&");
+  // var v_writer = v_params[1].split("=")[1];
+
+  // alert("v_writer: "+ decodeURIComponent(v_writer));
+  // escape:unescape  encodeURI:decodeURI  encodeURIComponent:decodeURIComponent 서로 짝꿍에 맞게 사용해야 된다. 마지막게 최신거라 마지막것만 되면 된다.
+  
+  //일반화 작업
+  var request = {};// 네임스페이스 괜히 jsp랑 똑같이 하고 싶음
+  request.getParameter=function(p_name){
+    if(location.href.indexOf("?") == -1) return null;//최소한의 안전장치
+    var v_queryString = location.href.split("?")[1];
+    var v_params = v_queryString.split("&");
+    for(var i=0; i<v_params.length; i++){
+      var v_name = v_params[i].split("=")[0];
+      var v_value = v_params[i].split("=")[1];
+      if(v_name == p_name){
+        return decodeURIComponent(v_value);
+      }
+    }
+    return null;
+  }
+  // alert(request.getParameter("n_title"));
+  // alert(request.getParameter("n_writer"));
+  // alert(request.getParameter("n_content"));
+
+  //같은 이름으로 여러개 넘어오는 값 처리
+  request.getParmameterValues=function(p_name){
+    if(location.href.indexOf("?") == -1) return null;  // 일단 최소한의 안전장치
+    var v_queryString = location.href.split("?")[1];
+    var v_params = v_queryString.split("&");
+    var v_rslt = [];  // 여러개를 담을 빈 배열을 준비
+    for(var i=0; i< v_params.length; i++){
+      var v_name = v_params[i].split("=")[0];
+      var v_value = v_params[i].split("=")[1];
+      if(v_name == p_name){
+        v_rslt.push(decodeURIComponent(v_value));
+      }
+    }
+    if(v_rslt.length == 0) return null;
+    return v_rslt; // 배열을 리턴
+  }
+  alert(request.getParmameterValues("n_skills"));
+  var out = {};
+  // out.print = document.write; this가 out으로 바뀌면서 오류
+  out.print = document.write.bind(document);
+
+  out.print("<h1>석희 못 맞히면 연예인</h1>");
+
+
+
+
+</script>

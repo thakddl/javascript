@@ -1,0 +1,25 @@
+정리의 기본은 keyword -> 연상 되도록
+
+use strict
+값의 복사와 참조(변수타입이 원시타입이냐 객체이냐)
+자동형변환(알아서 지맘대로) 
+배열식 접근법
+빨리데이션(validation 유효성 체크)
+this지정 - bind,call,apply
+콜백함수 - 즉각실행함수 -> DRY원칙(Do Not Repeat Yourself)
+함수 선언식, 표현식
+transform, transform-origin, rotate, skew
+AJAX, 비동기. Origin, Cross Origin, CORS, Same-Origin-Policy, JSONP
+다양한 Open-API
+빈객체를 네임스페이스로 활용
+var 전역/함수 Scope, let은 블락 Scope
+무한스크롤,이미지 끌어다 놓기(파일만 잘 가지고 있으면 된다) -> event.preventDefault(), event.stopPropagation()
+주소줄 잘라서 request.getParameter 만들어보기, frame 쓰면 보안이 약하다.
+localStorage(Cookie 대신 활용하면 좋음) - 제약: 문자열만 저장 가능
+발표당시, 오프라인 모드 지원을 위한 중요 이슈였었으나, 브라우저 업체가 협의가 안됨
+사용자개별 데이터를 저장하는데 사용하면 좋음
+action을 post로 주변 다음 html에 값을 넘길수없음
+get을 사용했을때만 주소줄에 남은 요청내용을 읽어서 처리할 수있음
+데이터 시각화, 차트 2차원 단순 차트가 보기 좋다.
+chart.js에서는 data속성에 접근하는 법이 핵심이다.
+z-index는 잘 쓰면 화면레이어를 겹쳐서, 어렵지 않게 Single Page Application을 만들 수 있다.

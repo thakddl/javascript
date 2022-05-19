@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+  <style>
+    .active {
+      color:red;
+      font-size: 2em;
+    }
+  </style>
+  <script src="./jsp.js"></script>
+</head>
+<body>
+  <h1>정말볼품없는 게시판</h1>
+<script>
+  // 그냥 배열 꺼내서 table형식으로만 뿌려주면 됨
+  var v_datas = JSON.parse(localStorage.getItem("gesiTable"));
+  /* 괘니 페이지 나누어 보아용*/
+  var v_curPage  = 1;   // 일단 그냥 1페이지
+  if(request.getParameter("yusin")){
+    v_curPage = request.getParameter("yusin");
+  }
+  var v_cntPerP  = 10;
+  var v_totalPage = Math.ceil(v_datas.length / v_cntPerP);
+  var v_startNum = (v_curPage -1)*10;  // 2page는 11부터
+  var v_endNum =  v_startNum + v_cntPerP; // 해당페이지의 배열 마지막 index
+  if( v_endNum >= v_datas.length ){  // 마지막페이지 글 갯수는 모자랄 수 있음
+    v_endNum = v_datas.length;
+  }
+  var v_tblStr = "<table border=2>";
+  v_tblStr += "<tr><th>넘버</th><th>글제목</th><th>지은이</th><th>보유스킬</th><th>삭제</th></tr>"
+  for(var i=v_startNum; i<v_endNum; i++){
+    v_tblStr += "<tr>";
+    v_tblStr += "<td>" + v_datas[i].id + "</td>";
+    /* 보통은 고유 key값을 주는 것이 좋은데 여기서는 그냥 index번호로 */
+    v_tblStr += "<td><a href='read.html?gid=" + v_datas[i].id + "'>" + v_datas[i].title + "</a></td>";
+    v_tblStr += "<td>" + v_datas[i].writer + "</td>";
+    v_tblStr += "<td>" + v_datas[i].skills + "</td>";
+    v_tblStr += "<td><input type='checkbox' name=nm_del value="+ v_datas[i].id +"></td>";
+    v_tblStr += "</tr>";
+  }
+  v_tblStr += "</table>";
+  v_tblStr += "<input type=button id='removeBtn' value='선택된거삭제'><br>";
+  v_tblStr += "<a href=write.html>글 쓰깅</a><br>";
+
+  /* 전체 페이지 출력 */
+  for(var i=1; i<=v_totalPage; i++){
+    if(i== v_curPage){
+      v_tblStr += "<a class=active href=list.html?yusin="+i+">"+ i +"</a>&nbsp;&nbsp;&nbsp;&nbsp;";        
+    }else {
+      v_tblStr += "<a href=list.html?yusin="+i+">"+ i +"</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+    }
+  }
+
+  out.print(v_tblStr);
+  
+  var removeBtn = document.getElementById("removeBtn");
+  var checkboxs = document.getElementsByName("nm_del");
+  var v_datas = JSON.parse(localStorage.getItem("gesiTable"));
+  
+  var f_del = function() {
+    for(var tar of checkboxs){
+      if(tar.checked){
+        var tarId = v_datas.findIndex(function(item){
+          return item.id == tar.value;
+        });
+        v_datas.splice(tarId, 1);
+      }
+    }
+    //로직적으로 해결하긴 했지만 근본적으로 좋은 방법은 아님, 값이 바뀌는 index번호를 쓰니깡
+    // for(var i=checkboxs.length-1; i>=0; i--){ // 앞으로 돌리면 땡겨져버림
+    //   if(checkboxs[i].checked){
+    //       v_datas.splice(i,1); // splice 메소드 중요, i번부터 1개
+    //   }
+    // }
+    // for(var i=0; i<v_ckboxs.length; i++){ // 앞으로 돌리면 땡겨져버림
+    //   if(v_ckboxs[i].checked){
+    //     for(var j=0; j< v_datas.length; j++){
+    //       if(v_datas[j].id == v_ckboxs[i].value){
+    //         v_datas.splice(j,1); // id는 유일하므로 찾아서 지웠으면 for문 빠져나가깅
+    //         break; // 안쪽 for문 빠져나가기
+    //       }
+    //     }
+    //   }
+    // }
+    localStorage.setItem("gesiTable", JSON.stringify(v_datas));
+    location.reload();
+  }
+  removeBtn.addEventListener('click', f_del);
+
+</script>
+</body>
+</html>

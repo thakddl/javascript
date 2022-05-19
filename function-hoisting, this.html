@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    alert(a())
+    function a(){//선언문 문법
+      return "위에서 부터 읽는 인터프리터 방식인데 실행이 된다. 최적화를 해주기 위해 hoisting을 해줌, 코드를 한번 스캔해서 선언부를 위로 올릴거다. 그말인즉슨 컴파일을 살짝 해주겠다는 거다";
+    }
+    var a = function(){//표현식 문법 alert(a())-error 가 난다
+      return "expression";
+    }
+    //"use strict";//엄격모드 잊지 말것, 이거 있으니까 window this가 안뜨네 무슨일??
+    //var v_roze = "로제"; //우리가 선언하는 전역변수는 다 window객체의 속성이 되어버림
+    window.v_roze = "허정은";
+    //alert(v_roze);
+    function f_click(){
+      console.log(this); // 겉보기에는 함수선언이지만 window객체의 메소드 선언
+      // 스크립트에선 프로그램 context(맥락, 흐름)에 따라 this가 
+      // 가리키는 값이 바뀌어 버림. 
+      // this를 컨트롤하는 call, apply, bind를 공부할 것임
+    }
+    //f_click(); window 생략 결국 함수지향으로 짜고 있다고 생각하지만 결국 객체지향 위에서 짜고 있는것이다. 결국 둘의 짬뽕이다.
+    window.f_click();
+
+    var v_hsh = {
+      name: "나 한석희 연예인"
+    }
+    v_hsh.myMethod = f_click; // 함수 포인터(함수명). 참조방식이다. 
+    v_hsh.myMethod();
+  </script>
+</body>
+</html>

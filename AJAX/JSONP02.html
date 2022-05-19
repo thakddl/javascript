@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>JSONPadding</title>
+</head>
+<body>
+  오픈 API로 qr code 만들기
+  <input type="text" id="id_sch">
+  <button id="id_btn">찾깅</button><br>
+  <div id="id_disp"></div>
+  <script>
+    var v_preURL = "https://quickchart.io/qr?text=";
+    var v_txtBox = document.querySelector("#id_sch");
+    var v_btn = document.querySelector("#id_btn");
+    var v_disp = document.querySelector("#id_disp");
+
+    var f_sch = function(){
+      var v_schWord  = v_txtBox.value;
+      var v_fullURL = v_preURL + v_schWord;
+      v_disp.innerHTML = "";
+
+      var v_img = document.createElement("img");
+      v_img.src = v_fullURL;
+      v_disp.appendChild(v_img);
+    }
+    v_btn.addEventListener("click",f_sch);
+  </script>
+</body>
+</html>

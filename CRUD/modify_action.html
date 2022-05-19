@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script src="./jsp.js"></script>
+<script>
+  //title writer skills content
+  var v_gid = request.getParameter("n_id");
+  var v_title = request.getParameter("n_title").replace("+", " ");
+  var v_writer = request.getParameter("n_writer").replace("+", " ");
+  var v_content = request.getParameter("n_content").replace("+", " ");
+  var v_skills = request.getParmameterValues("n_skills");
+  var idx = null;
+  var v_datas = JSON.parse(localStorage.getItem("gesiTable"));
+  
+  for(var data of v_datas){
+    if(data.id == v_gid){
+      idx = v_datas.indexOf(data);
+    }
+  }
+
+  v_datas[idx].title = v_title;
+  v_datas[idx].content = v_content;
+  v_datas[idx].writer = v_writer;
+  v_datas[idx].skills = v_skills;
+
+  localStorage.setItem("gesiTable", JSON.stringify(v_datas))
+  location.href="read.html?gid="+v_gid;
+</script>

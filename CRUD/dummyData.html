@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    var v_datas = [];
+    
+    /* 랜덤한 갯수의 랜덤한 skills 생성*/
+    var f_ranSkills = function(){ 
+        var v_skills = ["java","db","js","spring"];  // 원래 가져야 할 값
+        for(var i=0; i < Math.ceil(Math.random()*3); i++){
+            var v_ran = Math.floor(Math.random()*v_skills.length);
+            v_skills.splice(v_ran,1);
+        }
+        return v_skills; /* 랜덤하게 1개에서 3개로 구성된 배열 리턴*/
+    }
+
+    for(var i=1; i<=108; i++){    // 108번뇌!!
+        var v_gul = {};           // 글 묶음을 위한 바구니 빈 객체
+        v_gul.id = i;
+        v_gul.title = "제목이얌 " +i;    // 객체의 속성으로 마구 붙여줌
+        v_gul.writer = "주열짱 " + i;
+        v_gul.skills = f_ranSkills();
+        v_gul.content = "넘 빨라서 미치겠어용" + i;
+        v_datas.push(v_gul);
+    }
+    localStorage.setItem("gesiTable",JSON.stringify(v_datas)); // 로컬스토리지에 저장
+</script>

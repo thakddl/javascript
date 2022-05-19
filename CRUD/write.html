@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>잔소리 게시판</h1>
+  <form action="write_action.html" method="get">
+    제목 <input type="text" name="n_title" value="잔소리" autofocus required><br>
+    글쓰니 <input type="text" name="n_writer" value="꽉수밍"><br>
+    글쓰니 능력<br>
+    자바<input type="checkbox" name="n_skills" value="java" checked>
+    디비<input type="checkbox" name="n_skills" value="db">
+    화면<input type="checkbox" name="n_skills" value="js" checked>
+    스프링<input type="checkbox" name="n_skills" value="spring"><br>
+    <textarea name="n_content" cols="30" rows="10">답변은 짱</textarea>
+    <input type="submit" value="써저랑">
+  </form>
+</body>
+</html>

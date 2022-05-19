@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+<script>
+  var v_obj = {
+    a:"흥",
+    b:"치",
+    c:"피"
+  }
+  console.log(v_obj);
+  delete v_obj.b;     // 객체속성 삭제 명령 delete
+  console.log(v_obj);
+
+  //ArrayList 맹글기
+  //add,remove,set,get .... ArrayList 맹글기 with 정은 초코파이
+  var ArrayList = function(){
+    this.length = 0; // 속성은 여기에 기술
+    return this; // 생략해도 되지만 선생님은 일부러 맨날 이걸 쓰신다. 클래스로 쓰이는걸 명시하고 싶어성
+  }
+  ArrayList.prototype.add= function(p_arg){
+    this[this.length] = p_arg;
+    this.length++;
+    return this; // for 메서드 체이닝
+  }
+  ArrayList.prototype.set= function(p_index,p_val){
+    this[p_index] = p_val; //그냥 덮어쓰깅
+    return this;  // just for 메소드 체이닝
+  }
+  ArrayList.prototype.get= function(p_index){
+    return this[p_index]; // 메소드 체이닝 불가
+  }
+  ArrayList.prototype.remove= function(p_index){
+    //delete this[p_index];
+    for(var i=p_index; i<this.length-1; i++){
+      this[i] = this[i+1];
+    }
+    delete this[this.length-1];
+    this.length--;
+  }
+  ArrayList.prototype.indexOf= function(p_val){
+    // 리스트 안에서 해당 값을 찾으면 해당 index를 return하고
+    // 끝내 못 찾으면 -1을 return함
+    for(var i=0; i<this.length-1; i++){
+      if(this[i] == p_val){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  var ihanbum = new ArrayList();
+  ihanbum.add("이");
+  ihanbum.add("한");
+  ihanbum.add("범");
+  ihanbum.remove(1);
+  console.log(ihanbum.indexOf(""));
+  // console.log(ihanbum);
+  // console.log(ihanbum.get(1));
+</script>   
+</body>
+</html>

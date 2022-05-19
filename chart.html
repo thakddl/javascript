@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+</head>
+<body>
+  <div style="width:400px; height: 400px;">
+    <!--버그가 있음, canvas 사이즈로는 차트사이즈가 조절이 안됨 미쳐버림(첫고비)-->
+    <canvas id="myChart" width="100" height="100"></canvas>
+  </div>
+  <input type="button" value="누를거얌" id="id_btn">
+<script>
+  var v_anotherDataSet=
+    {
+      label: '# of Votes',
+      type:"bar",
+      data: [12, 19, 3, 5, 2, 3, 70, 66]
+    };
+  var v_btn = document.querySelector("#id_btn");
+  var f_click = function(){
+    //처음 만들때 갯수에 맞추어야 함(현실도 그러함)
+    var v_ranData = [];
+    for(var i=1; i<=8; i++){
+      v_ranData.push(Math.ceil(Math.random()*100));
+    }
+    // myChart.data.datasets[0].data = [1,2,3,4,5,6,7,8];// 쓰기도 가능한 가 확인
+    // 실제 데이터 주는 부분은 나중에 AJAX를 이용해서 한번에 넣어 버림 
+    myChart.data.datasets[0].data = v_ranData;  // 쓰기도 가능한 가 확인
+    myChart.data.datasets[1] = v_anotherDataSet;
+    myChart.data.labels=['R', 'B', 'Y', 'G', 'P', 'O','T','N'];
+    myChart.update();  // 중요 - 차트 다시 그려랑 명령
+    setTimeout(f_click,500);
+  }
+  v_btn.addEventListener("click",f_click);
+  
+  var ctx = document.getElementById('myChart').getContext('2d');
+  //그래픽엔진 가져오기(openGL) 마이크로소프트는 directX를 가지고 있음
+  var myChart = new Chart(ctx, {
+  type: 'line',// bar, line,doughnut, pie,radar등이 자주 쓰이는 차트
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+f_click(); // 페이지 로딩 끝나면 그냥 불러 재낌
+//요기 데이타에 접근하는 것이 사용 포인트
+//console.log(myChart.data.datasets[0].data);
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>JSONPadding</title>
+  <script>
+    //jsonFlickrFeed({.....})
+    function jsonFlickrFeed(p_data){
+      var v_items = p_data.items;
+      v_disp.innerHTML = "";
+        for(var i=0; i < v_items.length; i++){
+          var v_img = document.createElement("img");
+          v_img.src = v_items[i].media.m;
+          v_disp.appendChild(v_img);
+        }
+    }
+  </script>
+</head>
+<body>
+  이미지껌색
+  <input type="text" id="id_sch">
+  <button id="id_btn">찾깅</button><br>
+  <div id="id_disp"></div>
+  <!-- jsonFlickrFeed({.....}) -->
+  <script>
+    var v_preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+    var v_postURL = "&format=json";
+    var v_txtBox = document.querySelector("#id_sch");
+    var v_btn = document.querySelector("#id_btn");
+    var v_disp = document.querySelector("#id_disp");
+
+    var f_sch = function(){
+      var v_schWord  = v_txtBox.value;
+      var v_fullURL = v_preURL + v_schWord + v_postURL;
+
+      var v_old = document.querySelector("#id_script");
+      if(v_old){
+        document.head.removeChild(v_old);
+      }
+
+      var v_script = document.createElement("script");
+      v_script.id = "id_script";
+      v_script.src = v_fullURL;
+      document.head.appendChild(v_script);
+    }
+    v_btn.addEventListener("click",f_sch);
+  </script>
+</body>
+</html>

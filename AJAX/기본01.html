@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <form action=""> <!-- form에선 get/post만 쓸수 있음-->
+    <!--get/post 이외의 메소드값 넘길 때 아래처럼 hidden 사용 사기 -->
+    <input type="hidden" name="_method" value="put">
+  </form>
+  <script>
+    // CPU하나일때는 스레드든 비동기든 필요가 없었다. 어차피 눈속임이니까. 근데 이제는 CPU가 여러개라 실제로 빨라진다.
+    // get post put delete patch option 
+    var v_ajax = new XMLHttpRequest(); // 통신 대신 해줄 아저씨 맹글기
+    //v_ajax.open("메소드", "URL", "비동기여부"); 시킬 일 지정
+    v_ajax.open("get", "jansori.txt", true);
+    v_ajax.onreadystatechange = function(){ // 연락 모니터링 wlsgodgksms dlfdml 상태가 바뀔때마다 이벤트가 발생함
+      // 우린 중간 과정은 관심없고, 통신이 끝난 것만 관심이 있음
+      if(v_ajax.readyState == 4 && v_ajax.status == 200){ //readyState 아저씨 상태값=완료. v_ajax.status 서버의 상태값=완료
+        // responseText속성에 서버가 돌려준 값이 담겨져서 옴 response(어차피 서버는 String만 줄수있음 문서의 타입을 알려주면 브라우저가 그걸보고 해석하는거지. 그래서 responseText랑 똑같음거임), responseText, responseXML(얘네는 파싱해주라는 거지)가 있음
+        console.log(v_ajax.responseText);
+      }
+    }
+    v_ajax.send(); // 실행 이거를 위에 쓰고 이벤트 등록을 하면 상태를 놓치는게 있을 수 있으므로 이벤트 등록을 먼저 하고 보낸다.
+    console.log("이한범 바쳐서 허정은 공경하기");
+  </script>
+</body>
+</html>

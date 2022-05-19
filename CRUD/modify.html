@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="./jsp.js"></script>
+</head>
+<body>
+  <h1>수정</h1>
+  <form action="modify_action.html" method="get">
+    id <input type="text" name="n_id" value="id"><br>
+    제목 <input type="text" name="n_title" value="잔소리"><br>
+    글쓰니 <input type="text" name="n_writer" value="꽉수밍"><br>
+    글쓰니 능력<br>
+    자바<input type="checkbox" name="n_skills" value="java">
+    디비<input type="checkbox" name="n_skills" value="db">
+    화면<input type="checkbox" name="n_skills" value="js">
+    스프링<input type="checkbox" name="n_skills" value="spring"><br>
+    <textarea name="n_content" cols="30" rows="10">답변은 짱</textarea>
+    <input type="submit" value="수정">
+  </form>
+  <a href="list.html">괘니 리스트로 가용</a>
+  <script>
+    var v_gid = request.getParameter("gid");
+    var v_datas = JSON.parse(localStorage.getItem("gesiTable"));
+    let tars = document.querySelectorAll("input[name=n_skills]");
+    let idx = null;
+    for(var i=0; i<v_datas.length; i++){
+      if(v_datas[i].id == v_gid){  // 해당 글을 찾아서
+        document.querySelector("input[name=n_id]").value = v_datas[i].id;
+        document.querySelector("input[name=n_title]").value = v_datas[i].title;
+        document.querySelector("input[name=n_writer]").value = v_datas[i].writer;
+        document.querySelector("textarea[name=n_content]").value = v_datas[i].content;
+        
+        for(let skill of v_datas[i].skills){
+          for(let tar of tars){
+            if(tar.value == skill) tar.checked = true;
+          }
+        }
+
+        break;
+      }
+    }
+  </script>
+</body>
+</html>

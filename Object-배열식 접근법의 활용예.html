@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    //tricky, weary... 호불호가 많이 갈림
+    var kys = "KJW"
+    var grade = {
+      //["grade1"]:"사장",
+      // kys:"반짱", //불가능. 객체의 key(속성)값은 자동으로 문자열로 처리됨, value(값)에는 변수가 먹는다
+      [kys]:"반짱", //key 값을 변수로 처리하고 싶다면..
+      grade2:"바지사장",
+      grade3:"바지전무",
+      grade4:"우도리상무",
+    }
+
+    alert(grade.KJW);
+
+    var sawons = [
+      {name:"로제", level:"grade1"},
+      {name:"제니", level:"grade2"},
+      {name:"리사", level:"grade3"},
+      {name:"지쑤", level:"grade4"},
+    ]
+    var v_tblStr = "<table border=1>";
+    v_tblStr+="<tr><th>이름</th><th>직책</th></tr>";
+    for(var i=0; i<sawons.length; i++){
+      v_tblStr += "<tr>";
+      v_tblStr += "<td>"+sawons[i].name+"</td>";
+      //배열식 접근법을 모르면 어려워진다.
+      v_tblStr += "<td>"+grade[sawons[i].level]+"</td>";
+      v_tblStr += "</tr>";
+    }
+    v_tblStr+="</table>";
+    let box = document.querySelector("#box");
+    box.innerHTML = v_tblStr;
+  </script>
+</body>
+</html>

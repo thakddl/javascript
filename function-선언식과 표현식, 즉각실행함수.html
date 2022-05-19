@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <div id="lsm">나 소망이얌</div>
+<script>
+  // 레퍼런스형, 기본형 맛보기
+  // 기본적으로 문자열은 기본형이지만(primitive) .이 붙으면 
+  // 자동으로 String(Wrapper)으로 바뀜
+  alert("관우 웬일로열심".substring(0, 3));
+  var v_html = document.querySelector('#lsm');//레퍼런스 타입
+  v_html.innerHTML = "<h1>푸하하하</h1>";
+  
+  var v_html = document.querySelector('#lsm').innerHTML;//얜 스트링
+  v_html = "<h1>푸하하하</h1>";
+
+  // 함수 선언 방법
+  // function(){}//선언식이라고 생각해서 선언식 형식에 맞지 않아서 오류남
+  (function(){ alert("난 누구인가") });//표현식이라고 생각한해서 오류 안남. 표현식이기만 하면 다 됨
+
+  // 즉각 실행 함수라고 부름 
+  // 딱 한번만 실행이 필요한 내용을 함수로 만들고 싶지 않아서 곧 메모리 절약
+  // 중요한 핵심코드를 묶으면 중요함이 표시됨, 곧 블럭으로 보임
+  // 라이브러리 코드에서 한번씩 보임(일반적으로는 잘 안보임)
+  (function(p_arg){ alert("난 누구인가?"+p_arg) })("관우");
+
+  // 실행을 해서 하나의 결과 값을 돌려주는 것을 표현식이라고 한다. 쉽게 선언문 아니면 다 표현식
+  // 결과 값을 저장해주기는 하지만 변수를 주기 전까지 참조해 올 수 있는 방법은 없다.
+  // 하지만 관례를 지켜 줘야 하니까 위에걸로 약속된걸써라
+  234-function(p_arg){ alert("난 누구인가?"+p_arg) }("관우");
+  787+function(p_arg){ alert("난 누구인가?"+p_arg) }("관우"); 
+  1+function(p_arg){ alert("난 누구인가?"+p_arg) }("관우");
+  
+</script>
+</body>
+</html>

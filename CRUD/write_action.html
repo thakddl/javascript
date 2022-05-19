@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script src="./jsp.js"></script>
+<script>
+  var v_datas = null; // 그냥 괜히 null초기화
+  var v_id = 0;
+  if(!localStorage.getItem("gesiTable")){ 
+    v_datas = [];           // 첫번째 글이라면 담을 빈배열 초기화
+  } else {
+    v_datas = JSON.parse(localStorage.getItem("gesiTable"));
+  }
+  
+  if(v_datas.length){
+    v_id = v_datas[v_datas.length-1].id+1;
+  }
+  var v_title = request.getParameter("n_title");
+  var v_writer = request.getParameter("n_writer");
+  var v_skills = request.getParmameterValues("n_skills");
+  var v_content = request.getParameter("n_content").replace("+", " ");
+
+  //따로 저장하기 보단 한 묶음으로 묶어서 저장하고 싶음. 왜? 관련이 깊으니까
+  var v_gul = {}; //묶음을 위한 바구니 빈객체
+  v_gul.id = v_id;
+  v_gul.title = v_title; // 객체의 속성으로 마구 붙여줌
+  v_gul.writer = v_writer;
+  v_gul.skills = v_skills;
+  v_gul.content = v_content;
+
+  v_datas.push(v_gul);
+  //저장, localStorage는 문자열밖에 저장이 안됨
+  localStorage.setItem("gesiTable",JSON.stringify(v_datas));
+  alert("잘 저장 되었을거얌 아마도2...");
+  // location.replace("write.html"); // replace메소드는 꼭 새 걸 달라고 함
+  location.href = "list.html";  // 이미 가진 걸(캐쉬) 보여 줄 수도 있고,아닐 수도 있음
+</script>

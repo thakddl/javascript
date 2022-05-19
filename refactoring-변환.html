@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script>
+  //refactoring(리팩토링) 결국은 정리
+  //이렇게 정리하는 것을 리팩토링이라고 부름
+  //정리하다보니 굳이 가정변수가 필요없음도 알게됨
+  var isRepeat = function(p_arr, p_val){
+    for(var i=0; i<p_arr.length; i++){
+      if(p_arr[i] == p_val){
+        return true; //같은게 있어요
+      }
+    }
+    return false; //같은게 없어요
+  }
+  var v_lotto = [];
+  while("몇번 반복 될지 알수 없어"){
+    var v_ran = Math.ceil(Math.random()*45); //1~45
+    if(!isRepeat(v_lotto, v_ran)){ // 같은 값이 없다면
+      v_lotto.push(v_ran);
+    }
+    //종료 조건
+    if(v_lotto.length == 6) break;
+  }
+  alert("발생한 로또 번호는"+v_lotto);
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<meta charset='UTF-8'>
+<script>
+  //데이터 전송포맷으로 많이 사용하는 것은 속성만 가진
+  var name = "잔소리";
+  //객체의 key(속성)값은 자동으로 문자열로 처리됨, value(값)에는 변수가 먹는다
+  // var v_obj = {
+  //   name: name,
+  //   "merit":"dance",
+  //   huk:function(p_msg){
+  //     alert("수민이의 " + p_msg);
+  //   }
+  // }; //new Object()의 리터럴 표현, static 변수선언
+  
+  var v_obj = {};
+  // v_obj.name = "수민잉"; //더 성능이 좋기 때문에 더 선호한다.
+  v_obj["name"] = "수민잉"; //하지만 배열식 접근법이 꼭 필요한 순간이 있다.
+  // v_obj.0 = "소망회장님"; //자바스크립트 문법에서 변수명은 숫자로 시작할 수 없기때문에 사용이 불가능하다.
+  v_obj["0"] = "소망회장님";
+  var v_magu = "FBI";
+  v_obj[v_magu] = "소망회장님";
+
+  // v_obj.merit = "저 열심히 해요";
+  v_obj["merit"] = "쌤 너무 빨라요";
+  v_obj.huk = function(p_msg){
+    alert("수민이의 " + p_msg);
+  }
+  v_obj.huk("잔소리");
+  alert(v_obj.FBI)
+  var v_obj1 = { na:"이한범"}; //객체 생성 및 주소값 저장
+  v_obj1 = { na:"표주열"}; //새로운 객체를 생성해서 그 주소를 저장. 따라서 이렇게 쓰면 위에 만든 객체를 찾을(참조할) 방법이 없음 -> 메모리 누수 
+
+  var v_arr = []; //new Array()의 리터럴 표현. 아무거나 다 담아서 쓰기 편하다. 배열이 가지고 있는 배열요소 지우는 함수 splice()는 만들기 어렵다.
+</script>

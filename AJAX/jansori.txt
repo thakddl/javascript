@@ -1,0 +1,6 @@
+[
+  {"name":"roze", "age":25},
+  {"name":"jenni", "age":26},
+  {"name":"risa", "age":25},
+  {"name":"jisu", "age":27}
+]

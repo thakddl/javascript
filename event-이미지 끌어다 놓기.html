@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style>
+  #id_disp {
+    width:300px;
+    height:300px;
+    border:3px solid pink;
+  }
+</style>
+</head>
+<body>
+  <div id="id_disp" ondragover="f_over()" ondrop="f_drop()">여기에 이미지를 끌어다 놓으셩</div>
+<script>
+  var v_disp = document.querySelector("#id_disp");
+  function f_over(){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  function f_read(p_file){
+    var v_fileReader = new FileReader();
+    v_fileReader.onload = function(){
+      // v_disp.innerHTML = ""; // 다 싹 지워 가진 거 참
+      var v_img = document.createElement("img");
+      v_img.setAttribute("src",v_fileReader.result);
+      v_img.width=290;
+      v_img.height=290;
+      v_disp.appendChild(v_img);
+    }
+    v_fileReader.readAsDataURL(p_file);
+  }
+  function f_drop(){
+    event.preventDefault();
+    event.stopPropagation(); // 이것도 같이 쓰는 게 일반적
+    var v_files = event.dataTransfer.files;
+    for(var i=0; i<v_files.length; i++){
+      f_read(v_files[i]);
+    }
+  }
+  var f_block = function(){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  window.addEventListener("dragover",f_block);
+  window.addEventListener("drop",f_block);
+</script>
+</body>
+</html>

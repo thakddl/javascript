@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    관심분야(3개까지만 체크해 주셤)<br><hr>
+    HTML<input type="checkbox" name="nm_cat" value="html">
+    CSS<input type="checkbox" name="nm_cat" value="css">
+    JS<input type="checkbox" name="nm_cat" value="js">
+    JAVA<input type="checkbox" name="nm_cat" value="java">
+    MongoDB<input type="checkbox" name="nm_cat" value="mongodb">
+    Spring<input type="checkbox" name="nm_cat" value="spring">
+  </form>
+  <script>
+    "use strict"
+    var nm_cats = document.querySelectorAll("input[name=nm_cat]");
+    for(var i=0;i<nm_cats.length; i++){
+      nm_cats[i].addEventListener('click', check);
+    }
+    var cnt = 0;
+    function check(){
+      if(!this.checked){ // 체크 해제시
+        cnt--;
+        return;
+      }
+      if(cnt>=3){ // 세개 이상일때
+        event.preventDefault();
+        // 또는 this.checked = false;
+        return;
+      }
+      cnt++; // 세개 이하일때
+    }
+  </script>
+</body>
+</html>

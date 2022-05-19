@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+  <style>
+    .mother {
+      position: relative;
+    }
+    .child {
+      position: absolute;
+      border:5px groove black;
+      width:410px;
+    }
+</style>
+</head>
+<body>
+<!-- 
+  position absolute는 무조건 layer로 부웅 떠오름
+  z-index값이 크면 무조건 앞쪽
+-->    
+<input type="button" value="<" id="id_btn1">
+<input type="text" id="id_disp" value="" size="10">
+<input type="button" value=">" id="id_btn2"><br><br>
+<div id="mother" class="mother">
+  <div id="junho1" class="child">
+    <img src="./images/junho01.jpg" width="200" height="200">
+    <img src="./images/junho02.jpg" width="200" height="200"><br>
+    <img src="./images/junho03.jpg" width="200" height="200">
+    <img src="./images/junho04.jpg" width="200" height="200">
+  </div>
+  <div id="junho2" class="child">
+    <img src="./images/junho05.jpg" width="200" height="200">
+    <img src="./images/junho06.jpg" width="200" height="200"><br>
+    <img src="./images/junho07.jpg" width="200" height="200">
+    <img src="./images/junho08.jpg" width="200" height="200">
+  </div>
+  <div id="junho3" class="child">
+    <img src="./images/junho09.jpg" width="200" height="200">
+    <img src="./images/junho10.jpg" width="200" height="200"><br>
+    <img src="./images/junho11.jpg" width="200" height="200">
+    <img src="./images/junho12.jpg" width="200" height="200">
+  </div>
+  <div id="junho4" class="child">
+    <img src="./images/junho13.jpg" width="200" height="200">
+    <img src="./images/junho14.jpg" width="200" height="200"><br>
+    <img src="./images/junho15.jpg" width="200" height="200">
+    <img src="./images/junho16.jpg" width="200" height="200">
+  </div>
+</div>
+<script>
+  var v_left = document.querySelector("#id_btn1");
+  var v_text = document.querySelector("#id_disp");
+  var v_right = document.querySelector("#id_btn2");
+  var v_mother = document.querySelector("#mother");
+  var v_layers = v_mother.children;
+  var v_curIndex = 0;
+  var v_timer = null;
+
+  var f_over = function(){
+    v_mother.style.cursor = "pointer";
+    clearTimeout(v_timer);  // 타이머 죽이깅
+    v_timer = null;  // 그냥 괜히 초기화
+  }
+  v_mother.addEventListener("mouseover",f_over);
+
+  var f_out = function(){
+    v_mother.style.cursor = "default";
+    f_init(v_curIndex);
+  }
+  v_mother.addEventListener("mouseout",f_out);
+
+  var f_right = function(){
+    clearTimeout(v_timer);
+    f_init(v_curIndex+1);
+  }
+  v_right.addEventListener("click",f_right);
+
+  var f_left = function(){
+    clearTimeout(v_timer);
+    f_init(v_curIndex-1);
+  }
+  v_left.addEventListener("click",f_left);
+
+  var f_init = function(p_index){
+    if(p_index < 0) p_index= v_layers.length-1;
+    if(p_index == v_layers.length) p_index= 0;
+
+    for(var i=0; i<v_layers.length; i++){
+      v_layers[i].style.zIndex=100;
+    }
+    console.log("check:",p_index);
+    v_layers[p_index].style.zIndex = 1000;
+    v_text.value = (p_index + 1) + "/" + v_layers.length;
+    
+    v_curIndex = p_index;  // p_index는 함수내 지역변수라 전역변수에 값 할당
+    v_timer = setTimeout(f_init,1000,p_index+1); // 자동 회전
+  }
+  window.addEventListener("load",f_init.bind(null,0));
+
+</script>
+</body>
+</html>

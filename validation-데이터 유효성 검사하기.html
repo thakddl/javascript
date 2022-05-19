@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #nofocus {
+      width:50vw;
+      height:50vh;
+      background-color: blueviolet;
+    }
+  </style>
+</head>
+<body>
+  <!-- focus가 없는 애한테 주려고 할 때 0 -->
+  <div id="nofocus" tabindex="0"></div>
+  <form action="">
+    한석희 1  <input type="text" autofocus tabindex="2" value=""/><br/>
+    뎅와뻔호  <input type="text" value="" required tabindex="1"pattern="010-[0-9][4]-[0-9][4]" placeholder="010-1111-2222"/><br/>
+    한석희 3  <input type="text" value="" required tabindex="-1"pattern=""/><br/>
+    한석희 4  <input type="text" value="" required tabindex="3"pattern=""/><br/>
+    <input type="submit" value="쩐송"/>
+  </form>
+  <script>
+    var v_focus = document.querySelector("#nofocus");
+    v_focus.addEventListener("keydown", function () {//div에 key event를 주려고 하면 꼭 tabindex를 알아야한다
+      alert(event.key);
+      alert(event.keyCode);//옛날거
+    });
+  </script>
+</body>
+</html>

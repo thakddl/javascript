@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script>
+  //refactoring(리팩토링) 결국은 정리
+  var v_lotto = [];
+  while("몇번 반복 될지 알수 없어"){
+    var v_ran = Math.ceil(Math.random()*45); //1~45
+    //중복체크 로직 => 그 자체로 중요
+    var v_isIn = false;//가정변수. 없다고 가정하는 게 조금 유리해 보임
+    for(var i=0; i<v_lotto.length; i++){
+      if(v_lotto[i]==v_ran) {
+        v_isIn = true;
+        break;
+      }
+    }
+    if(!v_isIn){ // 같은 값이 없다면
+      v_lotto.push(v_ran);
+    }
+    //종료 조건
+    if(v_lotto.length == 6) break;
+  }
+  alert("발생한 로또 번호는"+v_lotto);
+</script>

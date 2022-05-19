@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    localStorage.setItem("키컷으면","노픈크록스");
+    localStorage.setItem("key","value");
+    // localStorage.setItem("key","넌 누구냐?");// key가 같으면 update
+    localStorage.key1 = "넌 반장이냥?"; // 이것도 가능
+    localStorage.removeItem("key"); // 삭제
+    console.log(localStorage.key(0)); // 해당 index의 key 값?
+    console.log(localStorage.length);
+
+    var v_obj = {
+      name:"소망",
+      description:"안경쓰면 더 착해보인다."
+    }
+
+    // localStorage는 문자열만 저장이 가능하기 때문에 객체를 저장할수가 없다. 
+    localStorage.setItem("체크", v_obj); 
+    localStorage.setItem("체크", JSON.stringify(v_obj)); // 문자열로 바꿔서 객체 저장 시도. 다시 받아올때 JSON으로 바꿔줘야함
+
+    localStorage.clear();
+
+    var v_datas = []; // 더미 데이터를 담을 배열;
+    for(var i=1; i<=20; i++){
+      var v_obj = {};
+      v_obj.name = "소망" + i;
+      v_obj.alias = "미래에 더 젊음" + 1;
+      v_datas.push(v_obj);
+    }
+    localStorage.setItem("체크", JSON.stringify(v_datas));
+    
+    //소망13의 alias 값을 "이한범 바쳐서?"로 바꾸어봅니다. 중요(로컬스토리지 사용의 포인트)
+    var json = JSON.parse(localStorage.getItem("체크"));//읽어와서
+    json[12].alias = "이한범 바쳐서?";//값 수정하고
+    json[12].alias = ["1","2","3","4"];//배열도 들어갈 수 있다. 객체지향디비 형식이다. 관계지향은 원자성이 보존되어야되서 값이 단일함....
+    //빅데이터 같은 뒤죽박죽의 비정형화된 데이터를 담기에는 객체지향디비만 가능하다. 그래서 뜨는것임
+    localStorage.setItem("체크", JSON.stringify(json));//update
+
+    // 객체지향DB는 비정형 데이터에 적합하다(컬럼갯수, 타입 등의 변화에 대응이 자연스럽다.) 
+    // mongoDB가 유명함
+
+  </script>
+</body>
+</html>

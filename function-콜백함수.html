@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+<script>
+  //callback 말 그대로 뒤에 부른다고 해서 callback 
+  //동기/비동기와 상관없음.
+  var f_daughter = function () {
+    alert("나 딸");
+  }
+
+  // var f_mother = function () {
+  //   alert("난 엄망");
+  //   f_daughter(); // 아주 형편없이 사용이 있어보이지 않는 그런 콜백함수
+  // }
+  
+  // 있어보이는 콜백함수
+  // 함수가 매개변수로 함수포인터(=함수이름)를 받아서 그 함수를 실행시키면
+  // 그 뒤에 불려지는 놈이 콜백함수당
+  var f_mother = function (p_callback) {//퍼스트클레스 언어. 매개변수로 함수를 받는것
+    alert("난 엄망");//공동영역
+    p_callback(); //콜백함수
+  }
+
+  // f_mother(f_daughter);
+  f_mother(function(){
+    alert("한범이 미웡");
+  });
+
+  //지역변수는 실행시에만 살아있고 사라져야 하는게 정상인데 자바 스크립트에서는
+  //내부적으로 스코프 체인 이라는 것이 있어서 바깥이랑 연결되어 있으면 지우지를 않는다. 계속 스택에 저장하고 있다.
+  //지역변수의 Scope(범위)가 확장되서 안죽고 살아있는 것을 closuer라고 부름
+  var f_closure = function(){
+    var v_local = "명진이 바보"; //지역변수라는 것에 주목
+    return function(){
+      return v_local;
+    };
+  }
+  var f_innerFunc = f_closure();
+  alert(f_innerFunc());
+  function f_sangwoo(){
+    if(p_arg>=10){
+      alert("상우 만만세");
+      return;
+    }
+    alert("상우 만만세");
+    //return; //이게 생략되어 있다고 생각하면 편함
+    //함수 종료기능을 가짐, if else => return 문을 잘쓰면 if만 남아서 코드 가독성이 좋아짐
+  }
+  alert(f_sangwoo());
+
+  // 회사에 갔더니 고참이 이미 f_common는 만들어 놨어 f_common코드는 모르고 f_each를 만들으래
+  var f_common = function (p_arr, p_cb) {
+    for (var i = 0; i < p_arr.length; i++) {
+      p_cb(i, p_arr[i], p_arr);
+    }
+  }
+
+  var v_arr = ["명진", "관우", "한범", "소망", "세준"];
+  var f_each = function (p_index, p_val) {
+    alert(p_index + ":" + p_val)
+  }
+  f_common(v_arr, f_each);
+
+  //또는 이런거
+  f_common(v_arr, function(p_index, p_val, p_arr) {
+    if (p_val == "한범") {
+      p_arr[p_index] = "한범바보";
+    }
+  });
+  // 이럴때 쓰는 것이다.
+</script>
+</body>
+</html>

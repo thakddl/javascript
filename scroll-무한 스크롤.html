@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>모바일에서 많이 쓰는 기능</title>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>잔소리 잔소리1</h1>
+    <h1>잔소리 잔소리2</h1>
+    <h1>잔소리 잔소리3</h1>
+    <h1>잔소리 잔소리4</h1>
+    <h1>잔소리 잔소리5</h1>
+    <h1>잔소리 잔소리6</h1>
+    <h1>잔소리 잔소리7</h1>
+    <h1>잔소리 잔소리8</h1>
+    <h1>잔소리 잔소리9</h1>
+    <h1>잔소리 잔소리10</h1>
+    <h1>잔소리 잔소리11</h1>
+    <h1>잔소리 잔소리12</h1>
+    <h1>잔소리 잔소리13</h1>
+    <h1>잔소리 잔소리14</h1>
+    <h1>잔소리 잔소리15</h1>
+    <h1>잔소리 잔소리16</h1>
+  </div>
+  <script>
+    setTimeout(function(){
+      //구글의 자랑질 자신들의 엔진이 넘 빨라서 브라우져가 알지도 못할정도 
+      window.scrollTo(0,0);
+    },10);
+    // 이것도 거의 이런식으로밖에 안 쓰니까 소스가지고 있다가 쪼메 수정
+    var v_tuning = 100; // 이 값으로 바닥에서 떨어진 포인트 상대적 지정 
+    var v_number = 1000;
+    var v_wrapper = document.querySelector("#wrapper");
+    var f_scroll = function(){
+      var scrollTop = parseInt(document.documentElement.scrollTop)//?
+      var clientHeight = document.documentElement.clientHeight;
+      var scrollHeight = document.documentElement.scrollHeight;
+      // 스크롤바가 바닥을 치면 scrollTop + clientHeight = scrollHeight
+
+      if((scrollTop + clientHeight) >= (scrollHeight - v_tuning)){
+        //실질적으로 사용할 땐 여기에 AJAX가 와야 함!
+        for(var i=1; i<=10; i++){
+          var v_h1 = document.createElement("h1");
+          v_h1.innerHTML = "수민이 잔소리 " + v_number++;
+          v_wrapper.appendChild(v_h1);
+        }
+      }
+    }
+    window.addEventListener("scroll",f_scroll);
+  </script>
+</body>
+</html>

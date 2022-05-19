@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" id="id_diff" value="눌러방방">
+  <script>
+    var v_btn = document.querySelector("#id_diff");
+    var f_click= function(p_name, p_insa){
+      alert(p_name + "님" + p_insa)
+    }
+    //v_btn.addEventListener('click',f_click("한석희","안녕하세요")); 버튼을 누르지도 않았는데 실행이 되버리고 버튼을 눌러도 실행이 안된다.
+    //이빼 사용하는 것이 바로 bind이다.
+    var v_obj337 = {
+      name : "어진임금님"
+    }
+    // bind는 함수를 바로 call하지 않고, 새로운 함수를 내부적으로 맹글어서(눈에 보이지는 않음)
+    // 그 함수 포인터(FP)를 리턴해줌. 다시 실행시켜줘야 실행됨(다른애들은 바로실행)
+    v_btn.addEventListener('click', f_click.bind(v_obj337, "어진", "훌륭하십니다."));//를
+    function f_new(){
+      alert("어진" + "님" + "훌륭하십니다.");//내부에서
+    }
+    v_btn.addEventListener('click', f_new);//로 만들어 준다. 내부적으로는 어떻게 처리하는지 정확하지는 않지만 이런식이다.
+    // console.log(f_click.bind(v_obj337, "어진", "훌륭하십니다."), ">>>>>", f_click)
+
+    function f_this(p_arg1, p_arg2){
+      console.log(this, p_arg1, p_arg2);
+    }
+    // this가 가리키는 값이 상황에 따라 바뛴다는 불만에 
+    // 직!접! this를! 세!팅! 할 수 있는 3개의 method를 제공함
+    // call, apply, bind - bind가 특히 중요함
+    var v_obj = {
+      name : "정현아짱"
+    }
+    v_obj.huk = f_this;
+    //v_obj.huk(1,2);
+    //v_obj.huk.call(window, "첫번째", "두번째"); // window는 매개변수로 넘어가지 않는다.
+    //v_obj.huk.call(document, "first", "seccond"); //? 
+
+    // apply는 call과 똑같으나, 매개변수를 항상 배열에 담아서 보내야 함
+    // 즉, apply는 배개변수를 배열에 담아서 보내주고 싶을 때 쓰면 됌
+    var v_arr2 = ["첫번째", "두번째"];
+    //v_obj.huk.apply(window, v_arr2);
+    //v_obj.huk.apply(document, ["first", "seccond"]);
+
+  </script>
+</body>
+</html>

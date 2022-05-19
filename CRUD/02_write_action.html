@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script src="./jsp.js"></script>
+<script>
+  var v_title = request.getParameter("n_title");
+  var v_writer = request.getParameter("n_writer");
+  var v_skills = request.getParameter("n_skills");
+  var v_content = request.getParameter("n_content");
+
+  //따로 저장하기 보단 한 묶음으로 묶어서 저장하고 싶음. 왜? 관련이 깊으니까
+  var v_gul = {}; //묶음을 위한 바구니 빈객체
+  v_gul.title = v_title; // 객체의 속성으로 마구 붙여줌
+  v_gul.writer = v_writer;
+  v_gul.skills = v_skills;
+  v_gul.content = v_content;
+
+  var v_datas = []; // 앞으로 v_gul객체가 더 많이 저장 되어야 하므로
+                    // 배열에 담기 위해 빈 배열 선언
+   v_datas.push(v_gul);
+   
+   //저장, localStorage는 문자열밖에 저장이 안됨
+   localStorage.setItem("gesiTable",JSON.stringify(v_datas));
+   alert("잘 저장 되었을거얌 아마도...");
+   location.replace("list.html");
+</script>

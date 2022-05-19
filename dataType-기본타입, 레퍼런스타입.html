@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+  <script>
+    // 일단 ES5버전으로....
+    "use strict"; // 엄격모드 적용
+    var aaa = "ddd"; // 일반적인 전역변수 선언
+    // 큰 프로젝트에서는 전역변수 리스트 관리 필요
+    // 그런데 JS에는 name space가 없음
+    var JY = {}; // name space용 빈 객체
+    JY.aaa = "흥";
+    JY.bbb = "치";
+    JY.ccc = "피";
+
+    // 전역변수 리스트 출력
+    for(var v_attr in JY){
+      console.log(v_attr);
+    }
+
+    // 변수 타입 기본 타입: number, string, boolean
+    // undefined, null은 무시
+    // 그외 객체(Array, JSON)
+    // 원시타입
+    var v_number1 = 100;
+    var v_number2 = v_number1; // 복사(copy)
+    v_number2 = 300;
+    // alert(v_number1);
+
+    // 레퍼런스 타입
+    var v_obj1 = {"name":"잔소리"};
+    var v_obj2 = v_obj1; // 레퍼런스(Reference)
+    v_obj2.name = "로제짱";
+    // alert(v_obj1.name);
+
+    var v_str = "100";
+    alert(typeof(v_str));
+    v_str = v_str - 0;
+    alert(typeof(v_str));
+
+    var v_str = "100";
+    alert(100+v_str);//문자열 더하기가 우선이므로 문자열 더하기가 된다.
+    alert(v_str-100);//문자열 빼기는 없으므로 숫자로 캐스팅된다.
+    // +는 문자열 더하기, 숫자더하기 중 문자 더하기가 우선
+    // -, *, / 는 숫자 연산 밖에 없음
+
+    //모든 것은 참이다. 0만 빼고오오오
+    // while("이거슨 무한루프푸푸푸푸"){
+    //   console.log("ddd");
+    //   break
+    // }
+    if("태형이 바빠"){
+      alert("이것은 참?");
+    } else {
+      alert("난 거짓이야");
+    }
+    if(""){
+      alert("이것은 참?");
+    } else {
+      alert("난 거짓이야");
+    }
+    if(-1){
+      alert("이것은 참?");
+    } else {
+      alert("난 거짓이야");
+    }
+    if(0){
+      alert("이것은 참?");// 0 이외에는 모두 참
+    } else {
+      alert("난 거짓이야");
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
